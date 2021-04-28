@@ -259,3 +259,36 @@ alter table test_case add custom_num varchar(64) null comment 'custom num';
 
 -- 修改前置条件为text
 ALTER TABLE test_case MODIFY COLUMN prerequisite text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT 'Test case prerequisite condition';
+
+
+
+-- 添加文件名字段
+alter table file_metadata
+    add file_name varchar(250) null;
+-- 初始化旧数据的文件名为name
+update file_metadata t1, file_metadata t2
+	set t1.file_name = t2.name
+    where t1.id = t2.id;
+-- 新增更新人和创建人
+alter table file_metadata
+    add creator varchar(50) null;
+alter table file_metadata
+    add modifier varchar(50) null;
+-- 新增查库方法字段
+alter table file_metadata
+    add method varchar(15) null;
+-- 初始化旧数据的查库方法为 DB
+update file_metadata set method = 'DB';
+-- 新增文件存储路径字段
+alter table file_metadata
+    add `path` varchar(255) null;
+alter table file_metadata
+    add `description` varchar(255) null;
+
+-- jar 文件数据迁移
+insert into file_metadata
+	(id, name, type, size, create_time, update_time, sort, project_id, file_name, creator, modifier,
+    method, path, description)
+        select jc.id, jc.name, 'JAR', 0, jc.create_time, jc.update_time, null,
+        null, jc.file_name, jc.creator, jc.modifier, 'PATH', jc.path, jc.description
+    from jar_config jc;
