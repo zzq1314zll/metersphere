@@ -2460,4 +2460,13 @@ public class ApiAutomationService {
         result.setCheckMsg(checkMsgList);
         return result;
     }
+
+    public List<ApiScenario> getScenarioCaseByIds(List<String> ids) {
+        if (CollectionUtils.isNotEmpty(ids)) {
+            ApiScenarioExample example = new ApiScenarioExample();
+            example.createCriteria().andIdIn(ids);
+            return apiScenarioMapper.selectByExample(example);
+        }
+        return new ArrayList<>();
+    }
 }
