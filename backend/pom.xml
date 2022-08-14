@@ -374,27 +374,28 @@
                     <skipTests>true</skipTests>
                 </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-clean-plugin</artifactId>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>src/main/resources/static</directory>
-                            <includes>
-                                <include>**</include>
-                            </includes>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                        <fileset>
-                            <directory>src/main/resources/public</directory>
-                            <includes>
-                                <include>**</include>
-                            </includes>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                    </filesets>
-                </configuration>
-            </plugin>
+            <!-- 暂时注释掉，不清理-->
+<!--            <plugin>-->
+<!--                <artifactId>maven-clean-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <filesets>-->
+<!--                        <fileset>-->
+<!--                            <directory>src/main/resources/static</directory>-->
+<!--                            <includes>-->
+<!--                                <include>**</include>-->
+<!--                            </includes>-->
+<!--                            <followSymlinks>false</followSymlinks>-->
+<!--                        </fileset>-->
+<!--                        <fileset>-->
+<!--                            <directory>src/main/resources/public</directory>-->
+<!--                            <includes>-->
+<!--                                <include>**</include>-->
+<!--                            </includes>-->
+<!--                            <followSymlinks>false</followSymlinks>-->
+<!--                        </fileset>-->
+<!--                    </filesets>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -411,6 +412,7 @@
                 <version>2.6</version>
             </plugin>
 
+<!--            !!!走一次就可以了!!!!-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
